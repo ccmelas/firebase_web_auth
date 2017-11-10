@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="auth">
+            <input type="email" id="email">
+            <input type="password" id="password">
+            <button class="btn btn-login" onclick="login();">Login</button>
+            <button class="btn btn-register" onclick="register()">Register</button>
+        </div>         
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD3zJWQ_R95uV--4VTDohZFc8I27k_AZAs",
+            authDomain: "test-project-5b77e.firebaseapp.com",
+            databaseURL: "https://test-project-5b77e.firebaseio.com",
+            projectId: "test-project-5b77e",
+            storageBucket: "test-project-5b77e.appspot.com",
+            messagingSenderId: "267168534902"
+        };
+        firebase.initializeApp(config);
+        </script> 
+        <script>
+            function login()
+            {
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                if(email && password) {
+                    firebase.auth()
+                    .signInWithEmailAndPassword(email, password)
+                    .then(onSuccessfulLogin).catch(onFailedLogin);
+                } else {
+                    alert('Please enter your username and password');
+                }
+            }
+
+            function onSuccessfulLogin(result)
+            {
+                console.log(result);
+            }
+
+            function onFailedLogin(error)
+            {
+                console.log(error);
+            }
+
+            function register()
+            {
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                if(email && password) {
+                    firebase.auth()
+                    .createUserWithEmailAndPassword(email, password)
+                    .then(onSuccessfulLogin).catch(onFailedLogin);
+                } else {
+                    alert('Please enter your username and password');
+                }
+            }
+        </script>      
+    </body>
+</html>
